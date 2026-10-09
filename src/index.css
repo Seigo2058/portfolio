@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+@import 'tailwindcss';
+
+/* Design tokens: off-white canvas, ink neutrals, one deep-green accent. */
+@theme {
+  --font-sans: 'Inter', 'Noto Sans JP', ui-sans-serif, system-ui, sans-serif;
+
+  --color-canvas: #fafaf7;
+  --color-surface: #ffffff;
+  --color-subtle: #f1f2ed;
+  --color-ink: #1a1d1b;
+  --color-ink-muted: #535955;
+  --color-line: #e2e4de;
+  --color-line-strong: #c9ccc4;
+  --color-accent: #1f5641;
+  --color-accent-strong: #153d2e;
+  --color-accent-soft: #e6eee9;
+  --color-on-accent: #ffffff;
+
+  --ease-calm: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+    font-feature-settings: 'palt' 1;
+    line-height: 1.8;
+  }
+  ::selection {
+    @apply bg-accent text-on-accent;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@utility text-ja {
+  word-break: auto-phrase;
+  text-wrap: pretty;
+}
+
+/* Scroll fade-in (see components/ui/Reveal.tsx). */
+.reveal {
+  opacity: 0;
+  transform: translateY(1rem);
+  transition:
+    opacity 0.8s var(--ease-calm),
+    transform 0.8s var(--ease-calm);
+}
+.reveal[data-delay='1'] { transition-delay: 0.08s; }
+.reveal[data-delay='2'] { transition-delay: 0.16s; }
+.reveal[data-delay='3'] { transition-delay: 0.24s; }
+.reveal[data-visible='true'] {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}

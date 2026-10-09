@@ -1,0 +1,10 @@
+{
+  "description": "Showcase your engineering skills with a responsive portfolio site designed for job seekers, allowing recruiters to quickly assess your projects and thought process.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
