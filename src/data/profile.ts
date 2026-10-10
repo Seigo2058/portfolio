@@ -1,3 +1,9 @@
+import cyclingPhoto from '../assets/about/cycling.webp'
+import fishingPhoto from '../assets/about/fishing.webp'
+import hikingPhoto from '../assets/about/hiking.webp'
+import workingPhoto from '../assets/about/working.webp'
+import type { Slide } from '../components/ui/Slideshow'
+
 export const profile = {
   nameJa: "吉永 誠悟",
   nameEn: "Seigo Yoshinaga",
@@ -11,6 +17,14 @@ export const profile = {
   github: "https://github.com/Seigo2058",
   email: "s2421218@s.do-johodai.ac.jp",
 }
+
+/** Hero slideshow photos, in display order. `position` keeps the subject in frame when cropped. */
+export const heroPhotos: Slide[] = [
+  { src: workingPhoto, alt: 'カフェでノートPCに向かって作業する吉永誠悟', position: '40% center' },
+  { src: hikingPhoto, alt: '山頂で湖を背にピースする吉永誠悟', position: 'center 65%' },
+  { src: cyclingPhoto, alt: '湖畔でロードバイクと並ぶ吉永誠悟', position: '25% center' },
+  { src: fishingPhoto, alt: '釣った魚を掲げる吉永誠悟', position: 'center 30%' },
+]
 
 export const aboutProfile = {
   title: 'Webフロントエンドエンジニア志望',

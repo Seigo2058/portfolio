@@ -1,3 +1,21 @@
+import allerqualAllergies from '../assets/works/allerqual-allergies.webp'
+import allerqualCapture from '../assets/works/allerqual-capture.webp'
+import allerqualDetail from '../assets/works/allerqual-detail.webp'
+import allerqualPc from '../assets/works/allerqual-pc.webp'
+import allerqualSp from '../assets/works/allerqual-sp.webp'
+import ebetsuForest from '../assets/works/ebetsu-forest.webp'
+import ebetsuHome from '../assets/works/ebetsu-home.webp'
+import ebetsuLife from '../assets/works/ebetsu-life.webp'
+import ebetsuPc from '../assets/works/ebetsu-pc.webp'
+import higumaCause from '../assets/works/higuma-cause.webp'
+import higumaEcology from '../assets/works/higuma-ecology.webp'
+import higumaMeasures from '../assets/works/higuma-measures.webp'
+import higumaPc from '../assets/works/higuma-pc.webp'
+import pattoTsugakuPc from '../assets/works/patto-tsugaku-pc.webp'
+import pattoTsugakuRoutes from '../assets/works/patto-tsugaku-routes.webp'
+import pattoTsugakuSchedule from '../assets/works/patto-tsugaku-schedule.webp'
+import pattoTsugakuTimetable from '../assets/works/patto-tsugaku-timetable.webp'
+
 /**
  * Work data. The work page (pages/WorkPage.tsx) is a template driven entirely
  * by `WorkDetail`; add a `detail` object to any work to give it a page.
@@ -38,12 +56,15 @@ export type WorkDetail = {
   retrospective?: string
 }
 
+/** Screenshots of the live site at PC (1440×900) and, optionally, smartphone (390×844) widths. */
+export type Thumbnails = { pc: ImageSlot; sp?: ImageSlot }
+
 export type Work = {
   slug: string
   title: string
   summary: string
   tags: string[]
-  thumbnail?: ImageSlot
+  thumbnails?: Thumbnails
   detail?: WorkDetail
 }
 
@@ -53,6 +74,10 @@ export const works: Work[] = [
     title: 'ALLERQUAL',
     summary: 'タイの大学との国際ワークショップで制作した、食物アレルギー対応のメニュー確認Webアプリ',
     tags: ['Next.js', 'Tailwind CSS', 'Supabase', 'Gemini API'],
+    thumbnails: {
+      pc: { src: allerqualPc, alt: 'ALLERQUAL のPC版トップ画面' },
+      sp: { src: allerqualSp, alt: 'ALLERQUAL のスマホ版トップ画面' },
+    },
     detail: {
       lead: 'タイの大学と北海道情報大学の「国際コラボレーションワークショップ」でWebデザインチームとして制作',
       siteUrl: 'https://iwdc-1-allerqual.vercel.app/',
@@ -72,14 +97,17 @@ export const works: Work[] = [
         {
           title: '撮影画面',
           description: '現地語で書かれたメニュー表や看板をスマホのカメラで撮影できる',
+          image: { src: allerqualCapture, alt: 'ALLERQUAL の撮影画面' },
         },
         {
           title: '料理詳細画面',
           description: 'メニュー表から料理名を判別後、料理詳細画面を閲覧できる',
+          image: { src: allerqualDetail, alt: 'ALLERQUAL の料理詳細画面' },
         },
         {
           title: 'アレルギー選択画面',
           description: '自身が持つアレルギーや宗教上の理由で食べられない食材を、21品目の中から選択できる',
+          image: { src: allerqualAllergies, alt: 'ALLERQUAL のアレルギー選択画面' },
         },
       ],
       highlights: '撮影画面と画像切り抜き画面を独自UIとし、使いやすい動作になるよう工夫した',
@@ -90,6 +118,9 @@ export const works: Work[] = [
     title: 'パッと見通学',
     summary: '大学の授業で制作したWebアプリ。時間割から毎日の通学ルートを計算',
     tags: ['Next.js', 'Tailwind CSS', 'Firebase', 'TransitAPI'],
+    thumbnails: {
+      pc: { src: pattoTsugakuPc, alt: 'パッと見通学 のPC版時間割画面' },
+    },
     detail: {
       lead: '大学の授業で制作したWebアプリ',
       siteUrl: 'https://pattomi-tsugaku.vercel.app/',
@@ -106,9 +137,21 @@ export const works: Work[] = [
       background:
         '大学生は曜日によって通学時間が違い、変則的な予定も入りやすいため、毎日の通学時間を覚えにくい。特に北海道情報大学は本数の限られたバス通学が必須で、バスの時間確認が必要',
       features: [
-        { title: '時間割からのルート計算', description: '時間割から毎日の通学ルートを計算する機能' },
-        { title: 'ルートの検索・登録', description: '通学以外のルートを検索して登録する機能' },
-        { title: '時刻表の計算・登録', description: '通学以外の時刻表を計算して登録する機能' },
+        {
+          title: '時間割からのルート計算',
+          description: '時間割から毎日の通学ルートを計算する機能',
+          image: { src: pattoTsugakuSchedule, alt: 'パッと見通学 の1週間の移動スケジュール画面' },
+        },
+        {
+          title: 'ルートの検索・登録',
+          description: '通学以外のルートを検索して登録する機能',
+          image: { src: pattoTsugakuRoutes, alt: 'パッと見通学 のルート検索結果画面' },
+        },
+        {
+          title: '時刻表の計算・登録',
+          description: '通学以外の時刻表を計算して登録する機能',
+          image: { src: pattoTsugakuTimetable, alt: 'パッと見通学 の時刻表画面' },
+        },
       ],
       highlights:
         '既存の乗換アプリでは不便な「時間割に基づくルート登録」を主機能にした。ホーム画面に時間割とMyルートを一覧表示し、毎回検索する手間をなくした',
@@ -119,9 +162,12 @@ export const works: Work[] = [
     title: 'となりのデカくて不器用なヤツ',
     summary: 'Webデザインコンテスト応募作品(優秀賞)。ヒグマの生態と問題の原因を伝えるサイト',
     tags: ['HTML', 'SCSS', 'JavaScript', 'GSAP', 'p5.js'],
+    thumbnails: {
+      pc: { src: higumaPc, alt: 'となりのデカくて不器用なヤツ のPC版トップ画面' },
+    },
     detail: {
       lead: 'Webデザインコンテスト応募作品(優秀賞)',
-      siteUrl: 'https://seigo2058.github.io/webcon/',
+      siteUrl: 'https://seigo-yoshinaga.dev/',
       githubUrl: 'https://github.com/Seigo2058/webcon',
       overview: {
         period: '4ヶ月',
@@ -135,9 +181,21 @@ export const works: Work[] = [
       background:
         'ヒグマの問題個体が報じられる中、北海道の若者にヒグマの正しい生態と問題の根本原因をわかりやすく伝えるために制作',
       features: [
-        { title: 'ヒグマの生態', description: 'ヒグマの生態をBento UIでインタラクティブに解説' },
-        { title: '問題の原因', description: 'ヒグマ問題の原因をビジュアルとアコーディオンパネルで解説' },
-        { title: '私たちにできる対策', description: '私たちにできるヒグマ対策をインタラクティブに解説' },
+        {
+          title: 'ヒグマの生態',
+          description: 'ヒグマの生態をBento UIでインタラクティブに解説',
+          image: { src: higumaEcology, alt: 'ヒグマの生態を解説するBento UI' },
+        },
+        {
+          title: '問題の原因',
+          description: 'ヒグマ問題の原因をビジュアルとアコーディオンパネルで解説',
+          image: { src: higumaCause, alt: 'ヒグマ問題の原因を解説するパネル' },
+        },
+        {
+          title: '私たちにできる対策',
+          description: '私たちにできるヒグマ対策をインタラクティブに解説',
+          image: { src: higumaMeasures, alt: 'ヒグマ対策を解説するセクション' },
+        },
       ],
       highlights:
         '既存の記事や動画は正確だが、専門的だったり視覚的に分かりにくく、興味がある人しか見ないコンテンツになっている。そこで、イラストとインタラクティブ要素を多用し、楽しみながら学べることを重視した',
@@ -148,6 +206,9 @@ export const works: Work[] = [
     title: '野鳥と暮らす街、江別',
     summary: '大学の授業で制作したWebサイト。江別市への移住を促す提案',
     tags: ['HTML', 'CSS', 'JavaScript', 'GSAP', 'Slick.js'],
+    thumbnails: {
+      pc: { src: ebetsuPc, alt: '野鳥と暮らす街、江別 のPC版トップ画面' },
+    },
     detail: {
       lead: '大学の授業で制作したWebサイト',
       siteUrl: 'https://seigo2058.github.io/EbetsuWithBird/',
@@ -164,9 +225,21 @@ export const works: Work[] = [
       background:
         '授業「Web制作プロジェクト」で、江別市への移住を促進するアイデアを考えてWebサイトを制作した。江別の野幌森林公園にはシマエナガやシマフクロウなど人気の野鳥が多く生息する。野鳥観察を生活の一部にした暮らしを提案する',
       features: [
-        { title: 'ホーム', description: '江別が野鳥観察に最適で住みやすい理由を解説' },
-        { title: '江別で暮らすページ', description: '自然に近く、都会と同じような生活も送れる江別の良さを解説' },
-        { title: '野幌森林公園ページ', description: '野鳥の住処である野幌森林公園の魅力を解説' },
+        {
+          title: 'ホーム',
+          description: '江別が野鳥観察に最適で住みやすい理由を解説',
+          image: { src: ebetsuHome, alt: '野鳥と暮らす街、江別 のホーム画面' },
+        },
+        {
+          title: '江別で暮らすページ',
+          description: '自然に近く、都会と同じような生活も送れる江別の良さを解説',
+          image: { src: ebetsuLife, alt: '野鳥と暮らす街、江別 の江別で暮らすページ' },
+        },
+        {
+          title: '野幌森林公園ページ',
+          description: '野鳥の住処である野幌森林公園の魅力を解説',
+          image: { src: ebetsuForest, alt: '野鳥と暮らす街、江別 の野幌森林公園ページ' },
+        },
       ],
       highlights:
         'ターゲットは、定年前にセカンドライフの移住先を探している東京在住の50代。この年齢層に合わせて、落ち着いたデザインとアニメーションを選んだ',

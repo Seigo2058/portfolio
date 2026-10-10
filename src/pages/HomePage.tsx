@@ -2,12 +2,14 @@ import clsx from "clsx"
 import Button from "../components/ui/Button"
 import Icon from "../components/ui/Icon"
 import Link from "../components/ui/Link"
+import DeviceMockup from "../components/ui/DeviceMockup"
 import Placeholder from "../components/ui/Placeholder"
 import Reveal from "../components/ui/Reveal"
+import Slideshow from "../components/ui/Slideshow"
 import { TagList } from "../components/ui/Tag"
 import { Eyebrow, Heading, Text } from "../components/ui/Typography"
 import { Container, Section } from "../components/ui/Layout"
-import { profile } from "../data/profile"
+import { heroPhotos, profile } from "../data/profile"
 import { works, workHref, type Work } from "../data/works"
 import { paths } from "../lib/router"
 
@@ -15,11 +17,11 @@ function Hero() {
   return (
     <section
       aria-labelledby="hero-name"
-      className="relative flex min-h-[calc(100svh-4rem)] items-center py-20"
+      className="relative flex min-h-[calc(100svh-4rem)] flex-col justify-center gap-12 py-20 lg:flex-row lg:items-center"
     >
       <Container>
         <div className="flex justify-start">
-          <div className="flex w-full max-w-xl flex-col gap-10">
+          <div className="flex w-full max-w-xl flex-col gap-10 lg:w-1/2 lg:pr-12">
             <Reveal>
               <Heading level={1} size="display" id="hero-name">
                 {profile.nameEn}
@@ -36,9 +38,15 @@ function Hero() {
           </div>
         </div>
       </Container>
+      {/* Phones: below the name. lg+: fills the right half of the first view. */}
+      <Slideshow
+        slides={heroPhotos}
+        label={`${profile.nameJa}の写真`}
+        className="mx-6 aspect-[4/3] rounded-3xl sm:mx-10 lg:absolute lg:inset-y-0 lg:right-0 lg:m-0 lg:aspect-auto lg:w-1/2 lg:rounded-none"
+      />
       <Link
         href={paths.works}
-        className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs font-medium uppercase tracking-[0.2em] text-ink-muted hover:text-ink sm:flex"
+        className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 lg:left-1/4 flex-col items-center gap-2 text-xs font-medium uppercase tracking-[0.2em] text-ink-muted hover:text-ink sm:flex"
       >
         Scroll
         <span aria-hidden="true" className="h-10 w-px bg-line-strong" />
@@ -126,11 +134,11 @@ function WorkFeature({ work, index }: { work: Work; index: number }) {
         >
           <div className="lg:col-span-7">
             <div className="overflow-hidden rounded-2xl transition-transform duration-700 ease-calm group-hover:scale-[1.015]">
-              <Placeholder
-                alt={work.thumbnail?.alt ?? `${work.title} のサムネイル`}
-                src={work.thumbnail?.src}
-                label={work.title}
-              />
+              {work.thumbnails ? (
+                <DeviceMockup {...work.thumbnails} />
+              ) : (
+                <Placeholder alt={`${work.title} のサムネイル`} label={work.title} />
+              )}
             </div>
           </div>
           <div className="lg:col-span-5">

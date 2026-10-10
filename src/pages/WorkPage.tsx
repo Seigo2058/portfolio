@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import Button from '../components/ui/Button'
+import DeviceMockup from '../components/ui/DeviceMockup'
 import Icon from '../components/ui/Icon'
 import Link from '../components/ui/Link'
 import Placeholder from '../components/ui/Placeholder'
@@ -77,7 +78,7 @@ function Features({ features }: { features: WorkDetail['features'] }) {
             <Reveal delay={((index % 3) + 1) as 1 | 2 | 3} className="h-full">
               <article className="flex h-full flex-col rounded-3xl border border-line bg-surface p-4">
                 <Placeholder
-                  ratio="portrait"
+                  ratio="screen"
                   alt={feature.image?.alt ?? `${feature.title}のスクリーンショット`}
                   src={feature.image?.src}
                   label={feature.title}
@@ -219,13 +220,17 @@ export default function WorkPage({ work }: { work: Work & { detail: WorkDetail }
         </header>
 
         <Reveal delay={2} className="mt-12 sm:mt-16">
-          <Placeholder
-            ratio="video"
-            alt={detail.hero?.alt ?? `${work.title} のメインビジュアル`}
-            src={detail.hero?.src}
-            label={work.title}
-            className="rounded-3xl"
-          />
+          {!detail.hero && work.thumbnails ? (
+            <DeviceMockup ratio="video" {...work.thumbnails} className="rounded-3xl" />
+          ) : (
+            <Placeholder
+              ratio="video"
+              alt={detail.hero?.alt ?? `${work.title} のメインビジュアル`}
+              src={detail.hero?.src}
+              label={work.title}
+              className="rounded-3xl"
+            />
+          )}
         </Reveal>
 
         {(detail.siteUrl || detail.githubUrl) && (

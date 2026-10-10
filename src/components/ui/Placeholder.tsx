@@ -4,7 +4,7 @@ type PlaceholderProps = {
   /** Accessible description; becomes the image alt once replaced. */
   alt: string
   label?: string
-  ratio?: 'video' | 'landscape' | 'portrait'
+  ratio?: 'video' | 'landscape' | 'portrait' | 'screen'
   src?: string
   className?: string
 }
@@ -13,6 +13,8 @@ const ratios = {
   video: 'aspect-video',
   landscape: 'aspect-[4/3]',
   portrait: 'aspect-[3/4]',
+  /** PC screenshot (1440×900). */
+  screen: 'aspect-[16/10]',
 }
 
 /** Image slot. Shows a neutral placeholder until `src` is provided. */
