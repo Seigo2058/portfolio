@@ -6,6 +6,8 @@ type PlaceholderProps = {
   label?: string
   ratio?: 'video' | 'landscape' | 'portrait' | 'screen'
   src?: string
+  /** CSS object-position, to keep the subject in frame when the image is cropped. */
+  position?: string
   className?: string
 }
 
@@ -18,12 +20,18 @@ const ratios = {
 }
 
 /** Image slot. Shows a neutral placeholder until `src` is provided. */
-export default function Placeholder({ alt, label, ratio = 'landscape', src, className }: PlaceholderProps) {
+export default function Placeholder({ alt, label, ratio = 'landscape', src, position, className }: PlaceholderProps) {
   const frame = clsx('relative overflow-hidden rounded-2xl bg-accent-soft', ratios[ratio], className)
   if (src) {
     return (
       <div className={frame}>
-        <img src={src} alt={alt} className="absolute inset-0 size-full object-cover" loading="lazy" />
+        <img
+          src={src}
+          alt={alt}
+          style={{ objectPosition: position }}
+          className="absolute inset-0 size-full object-cover"
+          loading="lazy"
+        />
       </div>
     )
   }

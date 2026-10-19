@@ -39,14 +39,14 @@ function Overview({ overview }: { overview: WorkDetail['overview'] }) {
   return (
     <Reveal>
       <section aria-label="概要" className="rounded-3xl border border-line bg-surface p-7 sm:p-10">
-        <dl className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <dl className="grid gap-8 sm:grid-cols-2 sm:gap-x-12">
           {rows.map((row) => (
             <div key={row.term}>
               <dt className="text-xs font-semibold tracking-[0.15em] text-ink-muted">{row.term}</dt>
               <dd className="mt-2 font-medium leading-relaxed text-ink text-ja">{row.value}</dd>
             </div>
           ))}
-          <div className="sm:col-span-2 lg:col-span-1">
+          <div>
             <dt className="text-xs font-semibold tracking-[0.15em] text-ink-muted">使用技術</dt>
             <dd className="mt-3 space-y-4">
               {overview.tech.map((group) => (
