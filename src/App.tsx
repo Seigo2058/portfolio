@@ -19,7 +19,7 @@ export default function App() {
     const target = section ? document.getElementById(section) : null
     if (target) target.scrollIntoView({ block: 'start' })
     else window.scrollTo({ top: 0 })
-    document.title = route.name === 'about' ? `About me | ${profile.nameJa}` : work ? `${work.title} | ${profile.nameJa}` : `${profile.nameJa} | Portfolio`
+    document.title = route.name === 'aboutMe' ? `About me | ${profile.nameJa}` : work ? `${work.title} | ${profile.nameJa}` : `${profile.nameJa} | Portfolio`
   }, [hash, section, work])
 
   return (
@@ -36,7 +36,7 @@ export default function App() {
       </a>
       <SiteHeader />
       <main id="main" tabIndex={-1} className="flex-1 outline-none">
-        {route.name === 'about' ? (
+        {route.name === 'aboutMe' ? (
           <AboutPage />
         ) : work?.detail ? <WorkPage key={work.slug} work={{ ...work, detail: work.detail }} /> : <HomePage />}
       </main>

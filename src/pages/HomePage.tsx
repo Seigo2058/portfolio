@@ -1,17 +1,17 @@
-import clsx from "clsx"
-import Button from "../components/ui/Button"
-import Icon from "../components/ui/Icon"
-import Link from "../components/ui/Link"
-import DeviceMockup from "../components/ui/DeviceMockup"
-import Placeholder from "../components/ui/Placeholder"
-import Reveal from "../components/ui/Reveal"
-import Slideshow from "../components/ui/Slideshow"
-import { TagList } from "../components/ui/Tag"
-import { Eyebrow, Heading, Text } from "../components/ui/Typography"
-import { Container, Section } from "../components/ui/Layout"
-import { heroPhotos, profile } from "../data/profile"
-import { works, workHref, type Work } from "../data/works"
-import { paths } from "../lib/router"
+import clsx from "clsx";
+import Button from "../components/ui/Button";
+import Icon from "../components/ui/Icon";
+import Link from "../components/ui/Link";
+import DeviceMockup from "../components/ui/DeviceMockup";
+import Placeholder from "../components/ui/Placeholder";
+import Reveal from "../components/ui/Reveal";
+import Slideshow from "../components/ui/Slideshow";
+import { TagList } from "../components/ui/Tag";
+import { Eyebrow, Heading, Text } from "../components/ui/Typography";
+import { Container, Section } from "../components/ui/Layout";
+import { heroPhotos, profile } from "../data/profile";
+import { works, workHref, type Work } from "../data/works";
+import { paths } from "../lib/router";
 
 function Hero() {
   return (
@@ -24,7 +24,7 @@ function Hero() {
           <div className="flex w-full max-w-xl flex-col gap-10 lg:w-1/2 lg:pr-12">
             <Reveal>
               <Heading level={1} size="display" id="hero-name">
-                {profile.nameEn}
+                {profile.siteName}
                 <span className="mt-3 block text-xl font-medium tracking-wide text-ink-muted sm:text-2xl">
                   {profile.nameJa}
                 </span>
@@ -32,7 +32,7 @@ function Hero() {
               <p className="mt-6 text-sm leading-relaxed text-ink-muted">
                 {profile.affiliation}
                 <br />
-                {profile.graduation}
+                {profile.laboratory}
               </p>
             </Reveal>
           </div>
@@ -49,10 +49,15 @@ function Hero() {
         className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 lg:left-1/4 flex-col items-center gap-2 text-xs font-medium uppercase tracking-[0.2em] text-ink-muted hover:text-ink sm:flex"
       >
         Scroll
-        <span aria-hidden="true" className="h-10 w-px bg-line-strong" />
+        <span
+          aria-hidden="true"
+          className="relative h-10 w-px overflow-hidden bg-line-strong"
+        >
+          <span className="absolute inset-0 animate-scroll-line bg-accent motion-reduce:hidden" />
+        </span>
       </Link>
     </section>
-  )
+  );
 }
 
 function Profile() {
@@ -112,19 +117,24 @@ function Profile() {
                 </dd>
               </div>
             </dl>
-            <Button href={paths.about} size="lg" trailingIcon="arrow-right" className="mt-12">
-              About meを見る
+            <Button
+              href={paths.aboutMe}
+              size="lg"
+              trailingIcon="arrow-right"
+              className="mt-12"
+            >
+              About me
             </Button>
           </Reveal>
         </div>
       </Container>
     </Section>
-  )
+  );
 }
 
 function WorkFeature({ work, index }: { work: Work; index: number }) {
-  const number = String(index + 1).padStart(2, "0")
-  const total = String(works.length).padStart(2, "0")
+  const number = String(index + 1).padStart(2, "0");
+  const total = String(works.length).padStart(2, "0");
   return (
     <li className="flex min-h-svh items-center border-t border-line py-20 lg:min-h-[85svh]">
       <Reveal className="w-full">
@@ -137,7 +147,10 @@ function WorkFeature({ work, index }: { work: Work; index: number }) {
               {work.thumbnails ? (
                 <DeviceMockup {...work.thumbnails} />
               ) : (
-                <Placeholder alt={`${work.title} のサムネイル`} label={work.title} />
+                <Placeholder
+                  alt={`${work.title} のサムネイル`}
+                  label={work.title}
+                />
               )}
             </div>
           </div>
@@ -173,7 +186,7 @@ function WorkFeature({ work, index }: { work: Work; index: number }) {
         </Link>
       </Reveal>
     </li>
-  )
+  );
 }
 
 function Works() {
@@ -198,7 +211,7 @@ function Works() {
         </ol>
       </Container>
     </Section>
-  )
+  );
 }
 
 function Contact() {
@@ -217,7 +230,7 @@ function Contact() {
       icon: "mail" as const,
       external: false,
     },
-  ]
+  ];
   return (
     <Section
       id="contact"
@@ -264,7 +277,7 @@ function Contact() {
         </div>
       </Container>
     </Section>
-  )
+  );
 }
 
 export default function HomePage() {
@@ -275,5 +288,5 @@ export default function HomePage() {
       <Works />
       <Contact />
     </>
-  )
+  );
 }
